@@ -1,0 +1,70 @@
+{
+  "blogs": [
+    {
+      "id": "1",
+      "content": "custom-hooks are awesome!",
+      "likes": 0
+    },
+    {
+      "content": "hello",
+      "likes": 0,
+      "id": "U9r3kLl"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Arto Hellas",
+      "blogs": [
+      {
+        "id": "first-blog",
+        "content": "First blog content"
+      },
+      {
+        "id": "second-blog",
+        "content": "Second blog content"
+      },
+      {
+        "id": "third-blog",
+        "content": "Third blog content"
+      },
+      {
+        "id": "fourth-blog",
+        "content": "Fourth blog content"
+      },
+      {
+        "id": "fifth-blog",
+        "content": "Fifth blog content"
+      },
+      {
+        "id": "sixth-blog",
+        "content": "Sixth blog content"
+      }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Matti Luukkainen",
+      "blogs": [
+      {
+        "id": "1",
+        "content": "custom-hooks are awesome!"
+      },
+      {
+        "id": "U9r3kLl",
+        "content": "hello"
+      }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Venla Ruuska",
+      "blogs": [
+        {
+          "id": "U9r3kLl",
+          "content": "hello"
+        }
+      ]
+    }
+  ]
+}
