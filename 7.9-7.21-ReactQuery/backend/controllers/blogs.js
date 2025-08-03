@@ -1,5 +1,4 @@
 const blogsRouter = require('express').Router();
-const blog = require('../models/blog');
 const Blog = require('../models/blog');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
@@ -83,6 +82,25 @@ blogsRouter.post('/', async (request, response) => {
     return response.status(404).json({ error: 'Blog not found after saving' });
   }
   return response.status(201).json(populatedBlog);
+});
+
+blogsRouter.post('/:id/comments', async (request, response) => {
+  const { id } = request.params;
+  const { content } = request.body;
+
+  const blog = await Blog.findById(id);
+  if (!blog) {
+    return response.status(404).json({ error: 'Blog not found' });
+  }
+
+  try {
+    blog.comments.push({ content });
+    await blog.save();
+    response.status(201).json(blog);
+  } catch (error) {
+    console.error('Error adding comment:', error);
+    response.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 blogsRouter.delete('/:id', async (request, response) => {

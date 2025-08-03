@@ -106,3 +106,11 @@ DELETE http://localhost:3005/api/users/{{userId}}
 
 ### login to get token
 POST http://localhost:3005/api/login
+
+### add a comment to a blog post
+POST http://localhost:3005/api/blogs/688fc0a4550c9011e22f97fe/comments
+Content-Type: application/json
+
+{
+  "content": "This is a test comment"
+}

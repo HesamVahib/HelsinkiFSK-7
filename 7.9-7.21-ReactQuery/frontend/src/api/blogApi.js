@@ -80,3 +80,22 @@ export const likeBlogPost = async (blogId) => {
 
   return response.json();
 };
+
+export const addCommentToBlogPost = async (newComment) => {
+
+  const { blogId, comment } = newComment;
+
+  const response = await fetch(`/api/blogs/${blogId}/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ content: comment }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  return response.json(201);
+}

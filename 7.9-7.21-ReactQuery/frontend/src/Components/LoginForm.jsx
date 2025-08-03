@@ -2,14 +2,18 @@ import { useState } from 'react';
 import { Display } from './Display';
 import { ErrorDisplay } from './Display';
 import { dispatchNotification} from '../Context/NotificationContext';
+import { useUserDispatch } from '../Context/UserContext';
 
 const LoginForm = ({ setUser }) => {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
   const dispatch = dispatchNotification();
-  
+  const userDispatch = useUserDispatch();
+
   const handleLogin = async event => {
+
     event.preventDefault();
 
     if (!username || !password) {
@@ -37,21 +41,24 @@ const LoginForm = ({ setUser }) => {
       }
 
       const user = await response.json();
-      setUser(user);
+      userDispatch({ type: 'SET_USER', payload: user });
+      // setUser(user);
       setUsername('');
       setPassword('');
+
       dispatch({ type: 'ADD_NOTIFICATION', payload: 'Login successful!' });
       setTimeout(() => {
         dispatch({ type: 'REMOVE_NOTIFICATION' });
       }, 5000);
       window.localStorage.setItem('loggedUser', JSON.stringify(user));
-    } catch (exception) {
-      const errorMessage = exception.message || 'Wrong username or password';
-      dispatch({ type: 'ADD_NOTIFICATION', payload: errorMessage });
-      setTimeout(() => {
-        dispatch({ type: 'REMOVE_NOTIFICATION' });
-      }, 5000);
-    }
+
+      } catch (exception) {
+        const errorMessage = exception.message || 'Wrong username or password';
+        dispatch({ type: 'ADD_NOTIFICATION', payload: errorMessage });
+        setTimeout(() => {
+          dispatch({ type: 'REMOVE_NOTIFICATION' });
+        }, 5000);
+      }
   };
 
   return (

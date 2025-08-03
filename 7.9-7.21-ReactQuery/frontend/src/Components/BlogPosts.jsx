@@ -1,27 +1,20 @@
 import { dispatchNotification } from "../Context/NotificationContext";
-import { Display, ErrorDisplay } from "./Display";
 import { useState } from "react";
 import CreateBlogForm from "./NewBlog";
 import { SortBlogs } from "./Blogs";
 import { useBlogPosts } from '../hooks/useBlogPosts';
 import { useCreatePost } from "../hooks/useCreatePost";
+import { useUser } from "../Context/UserContext";
 
-const BlogPosts = ({ user, setUser, updatedBlog, setBlogs }) => {
+const BlogPosts = ({ setBlogs }) => {
 
     const { isLoading, error } = useBlogPosts();
     const createPostMutation = useCreatePost();
+    const user = useUser();
 
     const [visible, setVisible] = useState(false);
 
     const dispatch = dispatchNotification();
-
-    const logoutButton = () => {
-        const handleLogout = () => {
-        setUser(null);
-        window.localStorage.removeItem('loggedUser');
-        };
-        return <button onClick={handleLogout}>logout</button>;
-    };
 
     const handleNewBlog = event => {
         event.preventDefault();
@@ -50,7 +43,6 @@ const BlogPosts = ({ user, setUser, updatedBlog, setBlogs }) => {
         event.target.title.value = '';
         event.target.author.value = '';
         event.target.url.value = '';
-        setVisible(false);
         };
 
     const buttonFormToggle = () => {
@@ -63,16 +55,12 @@ const BlogPosts = ({ user, setUser, updatedBlog, setBlogs }) => {
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
+
     return (
-        <div>
-        <Display tag="h2" text="Blogs" />
-        <ErrorDisplay color="green" />
-        <Display tag="p">
-            {user.username} logged in {logoutButton()}
-        </Display>
-        <CreateBlogForm handleNewBlog={handleNewBlog} visible={visible} />
-        {buttonFormToggle()}
-        <SortBlogs setBlogs={setBlogs} user={user} />
+        <div>      
+            <CreateBlogForm handleNewBlog={handleNewBlog} visible={visible} />
+            {buttonFormToggle()}
+            <SortBlogs setBlogs={setBlogs} user={user} />
         </div>
     );
 };
