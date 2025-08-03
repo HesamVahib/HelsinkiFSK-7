@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "prettier": "^3.6.2"
+  },
+  "test": "playwright test --project=chromium --project=firefox",
+  "scripts": {
+    "test": "playwright test",
+    "test:report": "playwright show-report",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.84.1"
+  }
+}
