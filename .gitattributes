@@ -1,0 +1,20 @@
+# Override GitHub language detection
+*.jsx linguist-language=JavaScript
+*.js linguist-language=JavaScript
+*.json linguist-language=JavaScript
+
+# Mark certain files as documentation or generated
+*.html linguist-documentation
+README.md linguist-documentation
+*.md linguist-documentation
+
+# Mark test reports and build artifacts as generated
+playwright-report/* linguist-generated=true
+test-results/* linguist-generated=true
+dist/* linguist-generated=true
+build/* linguist-generated=true
+coverage/* linguist-generated=true
+
+# Mark package-lock.json as generated to reduce its impact
+package-lock.json linguist-generated=true
+yarn.lock linguist-generated=true
